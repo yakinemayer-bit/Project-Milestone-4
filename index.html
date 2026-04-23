@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMDB Movie Browser – Milestone 4</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>TMDB Movie Browser</h1>
+  </header>
+
+  <nav>
+    <button id="nav-search" class="nav-btn active">Search</button>
+    <button id="nav-collection" class="nav-btn">Popular Movies</button>
+
+    <div id="view-toggle">
+      <span>View:</span>
+      <button id="view-grid" class="view-btn active">Grid</button>
+      <button id="view-list" class="view-btn">List</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Search section -->
+    <section id="search-section">
+      <h2>Search Movies</h2>
+      <div id="search-form">
+        <input type="text" id="searchTerm" placeholder="Enter movie title" />
+        <button id="btnSearch">Search</button>
+      </div>
+
+      <div id="search-pagination" class="pagination" style="display:none;">
+        <button class="page-btn" id="search-prev">&laquo; Prev</button>
+        <span id="search-page-info"></span>
+        <button class="page-btn" id="search-next">Next &raquo;</button>
+      </div>
+
+      <div id="search-results" class="results-grid"></div>
+    </section>
+
+    <!-- Collection section -->
+    <section id="collection-section" style="display:none;">
+      <h2>Popular Movies</h2>
+
+      <div id="collection-pagination" class="pagination" style="display:none;">
+        <button class="page-btn" id="collection-prev">&laquo; Prev</button>
+        <span id="collection-page-info"></span>
+        <button class="page-btn" id="collection-next">Next &raquo;</button>
+      </div>
+
+      <div id="collection-results" class="results-grid"></div>
+    </section>
+
+    <!-- Details panel -->
+    <section id="details-section">
+      <h2>Details</h2>
+      <div id="details-content">
+        <p>Select a movie from the search or popular list to view details.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Data provided by TMDB.</p>
+  </footer>
+
+  <!-- Mustache templates -->
+  <!-- Card template for grid view -->
+  <script id="movie-card-template" type="x-tmpl-mustache">
+    <div class="movie-card {{viewClass}}" data-id="{{id}}">
+      {{#poster_full}}
+        <img src="{{poster_full}}" alt="{{title}} poster" />
+      {{/poster_full}}
+      <div class="movie-card-title">{{title}}</div>
+    </div>
+  </script>
+
+  <!-- List-row template for list view -->
+  <script id="movie-list-item-template" type="x-tmpl-mustache">
+    <div class="movie-row {{viewClass}}" data-id="{{id}}">
+      {{#poster_full}}
+        <img src="{{poster_full}}" alt="{{title}} poster" />
+      {{/poster_full}}
+      <div class="movie-row-info">
+        <h3>{{title}}</h3>
+        <p>{{short_overview}}</p>
+        <p class="meta"><strong>Release:</strong> {{release_date}} &nbsp; | &nbsp; <strong>Rating:</strong> {{vote_average}}</p>
+      </div>
+    </div>
+  </script>
+
+  <!-- Details template -->
+  <script id="movie-details-template" type="x-tmpl-mustache">
+    {{#poster_full}}
+      <img src="{{poster_full}}" alt="{{title}} poster" />
+    {{/poster_full}}
+    <h3>{{title}}</h3>
+    <p><strong>Release Date:</strong> {{release_date}}</p>
+    <p><strong>Rating:</strong> {{vote_average}}</p>
+    <p><strong>Language:</strong> {{original_language}}</p>
+    <p><strong>Runtime:</strong> {{runtime}} minutes</p>
+    <p><strong>Overview:</strong></p>
+    <p>{{overview}}</p>
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://unpkg.com/mustache@latest"></script> <!-- Mustache.js CDN[web:53] -->
+  <script src="js/app.js"></script>
+</body>
+</html>
